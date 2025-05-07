@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Información de Usuario"
+        android:textSize="24sp"
+        android:textColor="#1A237E"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <ImageView
+        android:id="@+id/image_avatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/button_fetch_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Obtener Datos de Usuario"
+        android:backgroundTint="#3949AB"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textView_response"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aquí aparecerá la respuesta..."
+        android:textSize="16sp"
+        android:textColor="#212121"
+        android:padding="12dp"
+        android:background="#E8EAF6"
+        android:elevation="2dp"/>
+
+</LinearLayout>

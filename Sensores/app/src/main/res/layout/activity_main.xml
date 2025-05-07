@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/orientationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Orientación"
+        android:textSize="18sp"
+        android:layout_below="@id/statusText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/coordsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X: 0.0, Y: 0.0, Z: 0.0"
+        android:layout_below="@id/orientationText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+
+    <com.example.sensores.BallView
+        android:id="@+id/ballView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@id/coordsText"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reiniciar"
+        android:layout_below="@id/ballView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>
