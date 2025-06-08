@@ -4,13 +4,14 @@ import json
 from PIL import Image
 from config import GEMINI_API_KEY, GEMINI_MODEL_NAME
 
+
 class GeminiAnalyzer:
     def __init__(self):
         if not GEMINI_API_KEY or GEMINI_API_KEY == "TU_API_KEY_GEMINI_AQUI":
             raise ValueError("Configura tu clave de API de Gemini en config.py")
         genai.configure(api_key=GEMINI_API_KEY)
         self.model = genai.GenerativeModel(GEMINI_MODEL_NAME)
-        print("✅ GeminiAnalyzer inicializado correctamente.")
+        print("✅ GeminiAnalyzer inicializado correctamente.")  # Feedback inicial
 
     def _generate_prompt(self):
         return (
@@ -30,11 +31,13 @@ class GeminiAnalyzer:
         if not os.path.exists(image_path):
             print(f"[ERROR] Imagen no encontrada: {image_path}")
             return []
-
         try:
+            print(f"  Cargando imagen: {os.path.basename(image_path)}...")  # Feedback
             img = Image.open(image_path).convert("RGB")
             prompt = self._generate_prompt()
+            print("  Enviando imagen a la API de Gemini para análisis...")  # Feedback
             response = self.model.generate_content([prompt, img])
+            print("  Respuesta de Gemini recibida. Procesando datos...")  # Feedback
             raw_text = response.text.strip()
 
             # Limpiar si viene con "```json"
@@ -42,7 +45,6 @@ class GeminiAnalyzer:
                 raw_text = raw_text.replace("```json", "").replace("```", "").strip()
 
             data = json.loads(raw_text)
-
             if not isinstance(data, list):
                 print(f"[{os.path.basename(image_path)}] ⚠️ La respuesta no es una lista válida: {data}")
                 return []
@@ -57,9 +59,8 @@ class GeminiAnalyzer:
                         "grasas": float(item.get("grasas", 0)),
                         "carbohidratos": float(item.get("carbohidratos", 0))
                     })
-
+            print(f"  Análisis de {os.path.basename(image_path)} completado.")  # Feedback de éxito
             return alimentos
-
         except Exception as e:
             print(f"[{os.path.basename(image_path)}] ❌ Error al analizar con Gemini: {e}")
             return []

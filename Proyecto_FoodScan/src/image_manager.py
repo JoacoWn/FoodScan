@@ -2,7 +2,6 @@ import os
 import shutil
 from config import INPUT_DIR, PROCESSING_DIR, PROCESSED_DIR, ERROR_DIR
 
-
 class ImageManager:
     def __init__(self):
         self.input_dir = INPUT_DIR
@@ -13,14 +12,16 @@ class ImageManager:
 
     def _ensure_directories_exist(self):
         """Crea las carpetas necesarias si no existen."""
-        for directory in [self.input_dir, self.processing_dir, self.processed_dir, self.error_dir]:
+        for directory in [self.input_dir, self.processing_dir,
+                          self.processed_dir, self.error_dir]:
             os.makedirs(directory, exist_ok=True)
 
     def get_new_images(self):
         """Devuelve lista de imágenes en input_images/"""
         return [
             f for f in os.listdir(self.input_dir)
-            if os.path.isfile(os.path.join(self.input_dir, f)) and f.lower().endswith(('.jpg', '.jpeg', '.png'))
+            if os.path.isfile(os.path.join(self.input_dir, f)) and
+            f.lower().endswith(('.jpg', '.jpeg', '.png'))
         ]
 
     def move_to_processing(self, image_name):
