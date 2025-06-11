@@ -1,13 +1,15 @@
 import os
 import shutil
-from config import INPUT_DIR, PROCESSING_DIR, PROCESSED_DIR, ERROR_DIR
+# Se corrigieron los nombres de las variables importadas para que coincidan con config.py
+from config import INPUT_IMAGE_DIR, PROCESSING_IMAGE_DIR, PROCESSED_IMAGE_DIR, ERROR_IMAGE_DIR
 
 class ImageManager:
     def __init__(self):
-        self.input_dir = INPUT_DIR
-        self.processing_dir = PROCESSING_DIR
-        self.processed_dir = PROCESSED_DIR
-        self.error_dir = ERROR_DIR
+        # Ahora estas variables internas apuntan a los nombres correctos de config.py
+        self.input_dir = INPUT_IMAGE_DIR
+        self.processing_dir = PROCESSING_IMAGE_DIR
+        self.processed_dir = PROCESSED_IMAGE_DIR
+        self.error_dir = ERROR_IMAGE_DIR
         self._ensure_directories_exist()
 
     def _ensure_directories_exist(self):
