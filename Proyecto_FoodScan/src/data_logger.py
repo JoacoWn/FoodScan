@@ -1,15 +1,11 @@
 import os
 from datetime import datetime
 from pymongo import MongoClient, errors
-# from dotenv import load_dotenv # Ya no es necesario cargar aquí, se hace en config.py
 from bson.objectid import ObjectId
 from config import MONGO_URI, MONGO_DB_NAME, MONGO_COLLECTION_NAME # Importa desde config
 
-# load_dotenv() # Eliminar esta línea si ya se carga en config.py
-
 class DataLogger:
     def __init__(self):
-        # Usa la URI directamente de config.py
         self.mongo_uri = MONGO_URI
         self.db_name = MONGO_DB_NAME
         self.collection_name = MONGO_COLLECTION_NAME
@@ -18,42 +14,42 @@ class DataLogger:
             raise ValueError("MONGO_URI no está configurado. Asegúrate de tener un archivo .env o configurarlo en config.py.")
         self.db = None
         self.client = None
-        self.collection = None
+        self.collection = None # Inicializado a None, lo cual es correcto
         self._connect_to_mongodb()
 
     def _connect_to_mongodb(self):
         """Intenta conectar a MongoDB."""
         try:
             self.client = MongoClient(self.mongo_uri)
-            # El ping verifica la conexión sin operaciones costosas
             self.client.admin.command('ping')
-            self.db = self.client.foodscan_db
-            self.collection = self.db.meals  # Utiliza el nombre de la colección del documento
+            # Usar los nombres de la base de datos y la colección de config.py
+            self.db = self.client[self.db_name] # Usar la variable de instancia
+            self.collection = self.db[self.collection_name] # Usar la variable de instancia
             print("Conexión a MongoDB establecida con éxito.")
         except errors.ConnectionFailure as e:
             print(f"Error de conexión a MongoDB: {e}")
             self.db = None
             self.client = None
-            self.collection = None
+            self.collection = None # Asegurarse de que sea None en caso de fallo
         except Exception as e:
             print(f"Ocurrió un error inesperado al conectar a MongoDB: {e}")
             self.db = None
             self.client = None
-            self.collection = None
+            self.collection = None # Asegurarse de que sea None en caso de fallo
 
     def log_food_entry(self, analysis_result, image_name, meal_type, log_time=None):
         """
         Registra una entrada de comida en la base de datos.
         analysis_result debe ser un diccionario con el formato esperado.
         """
-        if not self.collection:
+        # CAMBIO: Usar 'is None' en lugar de 'not self.collection'
+        if self.collection is None:
             print("Error: No hay conexión a la base de datos para registrar la entrada.")
             return False
 
         if log_time is None:
             log_time = datetime.now()
 
-        # Asegúrate de que analysis_result contenga las claves esperadas
         if "alimentos" not in analysis_result:
             print("Error: 'alimentos' no encontrado en analysis_result.")
             return False
@@ -85,7 +81,8 @@ class DataLogger:
         meal_type: string para filtrar por tipo de comida (ej. "desayuno").
         query_filter: diccionario adicional para filtros personalizados (ej. {"user": "nombre"}).
         """
-        if not self.collection:
+        # CAMBIO: Usar 'is None' en lugar de 'not self.collection'
+        if self.collection is None:
             print("Error: No hay conexión a la base de datos para obtener entradas.")
             return []
 
@@ -105,7 +102,6 @@ class DataLogger:
             query["meal_type"] = meal_type
 
         try:
-            # Ordenar por timestamp en orden descendente para ver lo más reciente primero
             entries = list(self.collection.find(query).sort("timestamp", -1))
             return entries
         except Exception as e:
@@ -118,11 +114,11 @@ class DataLogger:
         para un día específico.
         target_date: objeto datetime que representa el día a resumir.
         """
-        if not self.collection:
+        # CAMBIO: Usar 'is None' en lugar de 'not self.collection'
+        if self.collection is None:
             print("Error: No hay conexión a la base de datos para obtener el resumen.")
             return None
 
-        # Calcular el inicio y el fin del día
         start_of_day = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0)
         end_of_day = datetime(target_date.year, target_date.month, target_date.day, 23, 59, 59, 999999)
 
@@ -160,12 +156,12 @@ class DataLogger:
         Elimina una entrada de comida de la base de datos por su _id.
         entry_id: El ID de la entrada a eliminar (puede ser un string o ObjectId).
         """
-        if not self.collection:
+        # CAMBIO: Usar 'is None' en lugar de 'not self.collection'
+        if self.collection is None:
             print("Error: No hay conexión a la base de datos para eliminar la entrada.")
             return False
 
         try:
-            # Asegurarse de que el ID es un ObjectId
             if not isinstance(entry_id, ObjectId):
                 entry_id = ObjectId(str(entry_id))
 
@@ -185,6 +181,6 @@ class DataLogger:
 
     def close_connection(self):
         """Cierra la conexión a la base de datos MongoDB."""
-        if self.client:
+        if self.client: # Aquí sí se puede usar 'if self.client' porque no es un objeto Collection
             self.client.close()
             print("Conexión a MongoDB cerrada.")

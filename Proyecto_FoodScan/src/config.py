@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
+import google.generativeai as genai # Mantener por ahora si otras partes lo usan, pero no para configurar
 
 # Carga las variables de entorno del archivo .env
 load_dotenv()
@@ -10,30 +10,33 @@ MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "foodscan_db")
 MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME", "food_entries")
 
-# --- Configuración de Gemini API ---
+# --- Configuración de OpenRouter API para Gemini ---
 # La API Key se carga del archivo .env
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") ### CAMBIOS AQUÍ ###
 
-# Asegúrate de que la API Key esté cargada antes de configurar genai
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY no encontrada en el archivo .env. Por favor, configúrala.")
+# La URL de la API de OpenRouter
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions" ### CAMBIOS AQUÍ ###
 
-# Configura la API de Gemini globalmente.
-# Esta línea solo necesita estar aquí una vez.
-genai.configure(api_key=GEMINI_API_KEY)
+# Asegúrate de que la API Key esté cargada
+if not OPENROUTER_API_KEY:
+    raise ValueError("OPENROUTER_API_KEY no encontrada en el archivo .env. Por favor, configúrala.")
 
-# Nombre del modelo de Gemini
-# ¡UTILIZA EL NUEVO MODELO PROPORCIONADO AQUÍ!
-GEMINI_MODEL_NAME = "gemini-1.5-pro" # <--- CAMBIA ESTA LÍNEA
+# YA NO SE HACE genai.configure() AQUÍ, porque usaremos requests a OpenRouter
+# Puedes comentar o eliminar la siguiente línea si no hay otras dependencias directas de genai
+# Si la dejas, no hará daño siempre que no uses genai.GenerativeModel sin argumentos
+# genai.configure(api_key=OPENROUTER_API_KEY) # ¡ELIMINA O COMENTA ESTA LÍNEA! ### CAMBIOS AQUÍ ###
 
-# --- Configuración del monitoreo de imágenes (si aún es relevante para alguna parte) ---
+
+# Nombre del modelo de Gemini que usaremos a través de OpenRouter
+GEMINI_MODEL_NAME = "google/gemini-2.5-flash-preview" ### CAMBIOS AQUÍ ###
+
+# --- Configuración del monitoreo de imágenes ---
 MONITOR_INTERVAL_SECONDS = 5
 
 # --- Secciones de comida ---
-FOOD_SECTIONS = ["desayuno", "almuerzo", "once"] # 'once' abarca cena
+FOOD_SECTIONS = ["desayuno", "almuerzo", "once"]
 
-# Rutas de imágenes (deberían ser relativas al directorio raíz del proyecto)
-# Estas rutas se usan en ImageManager
+# Rutas de imágenes (relativas al directorio raíz del proyecto)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 INPUT_IMAGE_DIR = os.path.join(BASE_DIR, 'images', 'input_images')
 PROCESSING_IMAGE_DIR = os.path.join(BASE_DIR, 'images', 'processing_images')

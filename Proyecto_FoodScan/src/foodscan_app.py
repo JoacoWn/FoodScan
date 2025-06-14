@@ -432,7 +432,7 @@ def _mostrar_historial_detallado(logger):
         print("  Alimentos:")
         if entry.get("alimentos"):
             for i, food_item in enumerate(entry["alimentos"]):
-                print(f"    {i + 1}. {food_item.get('nombre_alimento', 'N/A')}")
+                print(f"    {i + 1}. {food_item.get('nombre_alimento', 'N/A/home/joaquin')}")
                 cantidad_display = food_item.get("cantidad_usuario_g", food_item.get("cantidad_original_g", "N/A"))
                 print(f"       Cantidad: {cantidad_display}g")
 
