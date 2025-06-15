@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/softCream"
+    tools:context=".AddFoodActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/freshGreen"
+        android:elevation="4dp"
+        app:titleTextColor="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_meal_type_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/charcoalText"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="start" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:scrollbars="none">
+            <RadioGroup
+                android:id="@+id/radioGroupMealType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="4dp">
+                <RadioButton
+                    android:id="@+id/radioBreakfast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/meal_type_breakfast"
+                    android:checked="true"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/charcoalText" />
+                <RadioButton
+                    android:id="@+id/radioLunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/meal_type_lunch"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/charcoalText" />
+                <RadioButton
+                    android:id="@+id/radioDinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/meal_type_dinner"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/charcoalText" />
+                <RadioButton
+                    android:id="@+id/radioSnack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/meal_type_snack"
+                    android:textColor="@color/charcoalText" />
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_food_title"
+            android:textSize="22sp"
+            android:textColor="@color/deepGreen"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="24dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp">
+            <ImageView
+                android:id="@+id/imageViewPreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_border_bg"
+                android:visibility="gone"
+                tools:src="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:indeterminateTint="@color/mellowYellow" />
+
+        <Button
+            android:id="@+id/btnProcessImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/process_image_button"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:enabled="false"
+            android:backgroundTint="@color/deepGreen"
+            android:textColor="@color/white"
+            android:elevation="6dp"
+            app:cornerRadius="12dp"
+            android:layout_marginBottom="32dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btnCaptureImage"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:text="@string/capture_image_button_short"
+                android:textSize="14sp"
+                android:drawableTop="@drawable/ic_camera_foodscan" android:drawableTint="@color/charcoalText" android:backgroundTint="@color/mellowYellow"
+                android:textColor="@color/charcoalText"
+                android:layout_marginEnd="12dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:elevation="4dp"
+                app:cornerRadius="12dp" />
+
+            <Button
+                android:id="@+id/btnSelectFromGallery"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:text="@string/select_from_gallery_button_short"
+                android:textSize="14sp"
+                android:drawableTop="@drawable/ic_gallery_foodscan" android:drawableTint="@color/charcoalText" android:backgroundTint="@color/freshGreen"
+                android:textColor="@color/white"
+                android:layout_marginStart="12dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:elevation="4dp"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

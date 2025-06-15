@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Para leer de la galería en versiones antiguas de Android -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" /> <!-- Google recomienda hasta API 32, luego Media Visual Content -->
+    <!-- Para escribir en versiones antiguas de Android si la cámara no puede escribir directamente -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" /> <!-- Obsoleto en API 29+, pero útil para compatibilidad -->
+
+
+    <!-- Declara que tu aplicación usa la característica de cámara, pero no es estrictamente requerida
+         si también ofreces la opción de galería. Si SOLO fuera cámara, pondrías required="true" -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.App_FoodScan"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Registra la nueva actividad para agregar comida -->
+        <activity
+            android:name=".AddFoodActivity"
+            android:exported="false" />
+
+        <!-- Registra la nueva actividad para el historial -->
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+
+        <!-- Para proveer archivos a la cámara (requerido para API 24+) -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

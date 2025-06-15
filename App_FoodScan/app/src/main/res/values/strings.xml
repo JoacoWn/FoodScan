@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">FoodScan</string>
+    <!-- Nuevas cadenas para AddFoodActivity -->
+    <string name="add_food_title">Agregar Nueva Comida</string>
+    <string name="capture_image_button">Tomar Foto con Cámara</string>
+    <string name="select_from_gallery_button">Seleccionar de Galería</string>
+    <string name="select_meal_type_title">Selecciona el Tipo de Comida:</string>
+    <string name="meal_type_breakfast">Desayuno</string>
+    <string name="meal_type_lunch">Almuerzo</string>
+    <string name="meal_type_snack">Snack/Aperitivo</string>
+    <string name="meal_type_dinner">Cena</string>
+    <string name="process_image_button">Procesar Imagen</string>
+    <string name="capture_image_button_short">Cámara</string>
+    <string name="select_from_gallery_button_short">Galería</string>
+
+    <!-- Cadenas para MainActivity -->
+    <string name="main_add_food">Agregar Comida</string>
+    <string name="main_view_history">Historial de Comidas</string>
+    <string name="main_exit">Salir</string>
+
+    <!-- Cadenas para ResultActivity -->
+    <string name="analysis_results_title">Resultados del Análisis</string>
+    <string name="overall_food_label">Comida:</string>
+    <string name="overall_calories_label">Calorías Totales:</string>
+    <string name="overall_proteins_label">Proteínas Totales:</string>
+    <string name="overall_fats_label">Grasas Totales:</string>
+    <string name="overall_carbs_label">Carbohidratos Totales:</string>
+    <string name="detailed_foods_label">Alimentos desglosados:</string>
+    <string name="go_back_button">Volver</string>
+    <string name="no_history_yet">Aún no tienes historial de comidas.</string>
+    <string name="error_loading_history">No se pudo cargar el historial. Inténtalo de nuevo más tarde.</string>
+    <string name="connection_error_history">Error de conexión al servidor. Verifica tu conexión a internet.</string>
+
+    <!-- Cadenas para HistoryActivity -->
+    <string name="history_title">Historial de Comidas</string>
+    <string name="history_loading">Cargando historial...</string>
+
+    <!-- Mensajes Toast y otros -->
+    <string name="error_no_image_selected">Selecciona una imagen</string>
+    <string name="error_getting_image_file">Error al obtener el archivo de imagen.</string>
+    <string name="server_error_prefix">Error del servidor:</string>
+    <string name="connection_failure_prefix">Fallo en conexión:</string>
+    <string name="analysis_completed">Análisis completado.</string>
+    <string name="error_no_analysis_result">No se recibió ningún resultado de análisis.</string>
+    <string name="error_no_detailed_foods">No se encontraron detalles de alimentos.</string>
+    <string name="camera_permission_denied">Permiso de cámara denegado. No se puede tomar foto.</string>
+    <string name="storage_permission_denied">Permiso de almacenamiento denegado. No se puede seleccionar imagen.</string>
+    <string name="no_camera_app_found">No se encontró aplicación de cámara.</string>
+    <string name="error_creating_image_file">Error al crear archivo de imagen:</string>
+    <string name="image_captured_ready">Imagen capturada lista para procesar.</string>
+    <string name="image_selected_ready">Imagen seleccionada lista para procesar.</string>
+    <string name="action_cancelled">Acción de selección/captura de imagen cancelada.</string>
+    <string name="error_no_image_to_process">No hay imagen seleccionada para procesar.</string>
+    <string name="select_meal_type_prompt">Por favor, selecciona un tipo de comida.</string>
+
+
+</resources>

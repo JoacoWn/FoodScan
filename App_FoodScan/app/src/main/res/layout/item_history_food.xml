@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/white"> <!-- Fondo blanco para la tarjeta -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Fecha y Hora -->
+        <TextView
+            android:id="@+id/tvHistoryTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha: 14/06/2025 10:30"
+            android:textSize="14sp"
+            android:textColor="@color/lightGrayAccent"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif-light" />
+
+        <!-- Tipo de Comida -->
+        <TextView
+            android:id="@+id/tvHistoryMealType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo: Almuerzo"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textColor="@color/deepGreen"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Resumen de Alimentos (ej. Pan Blanco, 3 Mandarinas) -->
+        <TextView
+            android:id="@+id/tvHistoryFoodSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alimentos: Pan Blanco, Gajos de Mandarina"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/charcoalText"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Línea separadora -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightGrayAccent"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Calorías Totales -->
+        <TextView
+            android:id="@+id/tvHistoryTotalCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calorías: 0.00 kcal"
+            android:textSize="16sp"
+            android:textColor="@color/charcoalText"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Proteínas Totales -->
+        <TextView
+            android:id="@+id/tvHistoryTotalProteins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proteínas: 0.00 g"
+            android:textSize="14sp"
+            android:textColor="@color/charcoalText" />
+
+        <!-- Grasas Totales -->
+        <TextView
+            android:id="@+id/tvHistoryTotalFats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grasas: 0.00 g"
+            android:textSize="14sp"
+            android:textColor="@color/charcoalText" />
+
+        <!-- Carbohidratos Totales -->
+        <TextView
+            android:id="@+id/tvHistoryTotalCarbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carbohidratos: 0.00 g"
+            android:textSize="14sp"
+            android:textColor="@color/charcoalText" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

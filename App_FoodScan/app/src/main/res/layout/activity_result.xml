@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/softCream"
+    tools:context=".ResultActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/freshGreen"
+        android:elevation="4dp"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="?attr/homeAsUpIndicator" android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/analysis_results_title"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/deepGreen"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resumen General:"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvOverallFoodName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/overall_food_label"
+                        android:textSize="16sp"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvOverallCalories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/overall_calories_label"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/deepGreen"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvOverallProteins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/overall_proteins_label"
+                        android:textSize="14sp"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginBottom="2dp" />
+
+                    <TextView
+                        android:id="@+id/tvOverallFats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/overall_fats_label"
+                        android:textSize="14sp"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginBottom="2dp" />
+
+                    <TextView
+                        android:id="@+id/tvOverallCarbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/overall_carbs_label"
+                        android:textSize="14sp"
+                        android:textColor="@color/charcoalText" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detailed_foods_label"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/deepGreen"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:id="@+id/food_items_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/go_back_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:backgroundTint="@color/lightGrayAccent"
+                android:textColor="@color/charcoalText"
+                android:elevation="4dp"
+                app:cornerRadius="8dp"
+                android:onClick="goBack" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

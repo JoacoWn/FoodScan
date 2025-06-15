@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/softCream"
+    tools:context=".HistoryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/freshGreen"
+        android:elevation="4dp"
+        app:titleTextColor="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/history_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/deepGreen"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp" />
+
+        <ProgressBar
+            android:id="@+id/historyProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminateTint="@color/mellowYellow" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewHistory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvNoHistoryMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/history_loading"
+            android:textSize="16sp"
+            android:textColor="@color/charcoalText"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>
