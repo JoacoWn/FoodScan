@@ -54,6 +54,10 @@ dependencies {
     // Estas son las que causaban "Cannot resolve symbol" en tus archivos Java.
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Dependencia del Interceptor de Logging de OkHttp para ver logs de red
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0") // <--- ¡DEPENDENCIA AÑADIDA AQUÍ!
+
     implementation("com.github.bumptech.glide:glide:4.16.0")
     // Ojo: Si estás usando Kotlin, a veces el "annotationProcessor" se reemplaza por "kapt"
     // Pero si tu proyecto es Java puro, "annotationProcessor" es correcto.

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_foodscan.R;
 import com.example.app_foodscan.model.FoodHistoryItem;
-import com.example.app_foodscan.model.FoodItem; // Para acceder a los alimentos individuales
+import com.example.app_foodscan.model.FoodItemDetail; // ¡IMPORTANTE: Usar FoodItemDetail!
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +19,8 @@ import java.util.Locale;
 
 /**
  * Adaptador para mostrar el historial de comidas en un RecyclerView.
+ * NOTA: Este adaptador es para el diseño original de lista plana del historial.
+ * Para el nuevo diseño agrupado por día/comida, se usa DailyHistoryAdapter.
  */
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
@@ -86,12 +88,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             // Formatear la fecha y hora
             String formattedTimestamp = "N/A";
             try {
+                // El formato de timestamp de MongoDB puede variar. Asegúrate de que este sea el correcto.
+                // Ejemplo: "2023-10-26T10:30:00.123456"
                 SimpleDateFormat isoFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault());
                 Date date = isoFormatter.parse(item.getTimestamp());
                 SimpleDateFormat displayFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 formattedTimestamp = displayFormatter.format(date);
             } catch (ParseException | NullPointerException e) {
                 e.printStackTrace();
+                // Si hay un error, usa el timestamp tal cual viene o un mensaje de error.
+                formattedTimestamp = item.getTimestamp() != null ? item.getTimestamp() : "Formato de fecha inválido";
             }
             tvHistoryTimestamp.setText(String.format("Fecha y Hora: %s", formattedTimestamp));
 
@@ -100,25 +106,31 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
             // Resumen de alimentos (ej. "Pan Blanco, Mandarina, etc.")
             StringBuilder foodSummary = new StringBuilder();
-            if (item.getAlimentos() != null && !item.getAlimentos().isEmpty()) {
-                for (int i = 0; i < item.getAlimentos().size(); i++) {
-                    FoodItem food = item.getAlimentos().get(i);
-                    foodSummary.append(food.getNombre());
-                    if (i < item.getAlimentos().size() - 1) {
+            // --- CAMBIO CLAVE AQUÍ: usar getAlimentosDetallados() y FoodItemDetail ---
+            if (item.getAlimentosDetallados() != null && !item.getAlimentosDetallados().isEmpty()) {
+                for (int i = 0; i < item.getAlimentosDetallados().size(); i++) {
+                    FoodItemDetail food = item.getAlimentosDetallados().get(i); // ¡Ahora es FoodItemDetail!
+                    foodSummary.append(food.getNombreAlimento()); // ¡Ahora es getNombreAlimento()!
+                    if (i < item.getAlimentosDetallados().size() - 1) { // Usar getAlimentosDetallados().size()
                         foodSummary.append(", ");
                     }
                 }
             } else {
-                foodSummary.append("Sin alimentos detallados");
+                // Si no hay alimentos detallados, pero sí un nombre general de comida
+                if (item.getNombreGeneralComida() != null && !item.getNombreGeneralComida().isEmpty()) {
+                    foodSummary.append(item.getNombreGeneralComida());
+                } else {
+                    foodSummary.append("Sin alimentos detallados");
+                }
             }
             tvHistoryFoodSummary.setText(String.format("Alimentos: %s", foodSummary.toString()));
 
 
             // Totales nutricionales
-            tvHistoryTotalCalories.setText(String.format("Calorías: %.2f kcal", item.getTotalCalorias()));
-            tvHistoryTotalProteins.setText(String.format("Proteínas: %.2f g", item.getTotalProteinas()));
-            tvHistoryTotalFats.setText(String.format("Grasas: %.2f g", item.getTotalGrasas()));
-            tvHistoryTotalCarbs.setText(String.format("Carbohidratos: %.2f g", item.getTotalCarbohidratos()));
+            tvHistoryTotalCalories.setText(String.format(Locale.getDefault(), "Calorías: %.2f kcal", item.getTotalCalorias()));
+            tvHistoryTotalProteins.setText(String.format(Locale.getDefault(), "Proteínas: %.2f g", item.getTotalProteinas()));
+            tvHistoryTotalFats.setText(String.format(Locale.getDefault(), "Grasas: %.2f g", item.getTotalGrasas()));
+            tvHistoryTotalCarbs.setText(String.format(Locale.getDefault(), "Carbohidratos: %.2f g", item.getTotalCarbohidratos()));
         }
 
         // Método auxiliar para capitalizar la primera letra (ej. "desayuno" -> "Desayuno")

@@ -93,7 +93,7 @@ public class AddFoodActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         // Inicializar ApiService
-        apiService = ApiClient.getClient().create(ApiService.class);
+        apiService = ApiClient.getClient();
 
         // Configurar listeners de botones
         btnCaptureImage.setOnClickListener(v -> checkCameraPermissionAndCaptureImage());
@@ -252,7 +252,7 @@ public class AddFoodActivity extends AppCompatActivity {
 
         RequestBody mealTypeRequestBody = RequestBody.create(MediaType.parse("text/plain"), mealType);
 
-        Call<FoodResult> call = apiService.uploadImage(body, mealTypeRequestBody);
+        Call<FoodResult> call = apiService.analyzeImage(body, mealTypeRequestBody);
         call.enqueue(new Callback<FoodResult>() {
             @Override
             public void onResponse(Call<FoodResult> call, Response<FoodResult> response) {

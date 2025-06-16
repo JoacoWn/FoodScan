@@ -1,24 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FoodScan</string>
-    <!-- Nuevas cadenas para AddFoodActivity -->
+
     <string name="add_food_title">Agregar Nueva Comida</string>
     <string name="capture_image_button">Tomar Foto con Cámara</string>
     <string name="select_from_gallery_button">Seleccionar de Galería</string>
     <string name="select_meal_type_title">Selecciona el Tipo de Comida:</string>
     <string name="meal_type_breakfast">Desayuno</string>
     <string name="meal_type_lunch">Almuerzo</string>
-    <string name="meal_type_snack">Snack/Aperitivo</string>
+    <string name="meal_type_snack">Snack</string>
     <string name="meal_type_dinner">Cena</string>
     <string name="process_image_button">Procesar Imagen</string>
     <string name="capture_image_button_short">Cámara</string>
     <string name="select_from_gallery_button_short">Galería</string>
 
-    <!-- Cadenas para MainActivity -->
     <string name="main_add_food">Agregar Comida</string>
     <string name="main_view_history">Historial de Comidas</string>
     <string name="main_exit">Salir</string>
+    <string name="app_logo_description">Logotipo de la aplicación FoodScan</string>
+    <string name="add_food_button">Agregar Comida</string>
+    <string name="view_history_button">Historial de Comidas</string>
 
-    <!-- Cadenas para ResultActivity -->
     <string name="analysis_results_title">Resultados del Análisis</string>
     <string name="overall_food_label">Comida:</string>
     <string name="overall_calories_label">Calorías Totales:</string>
@@ -27,15 +29,28 @@
     <string name="overall_carbs_label">Carbohidratos Totales:</string>
     <string name="detailed_foods_label">Alimentos desglosados:</string>
     <string name="go_back_button">Volver</string>
-    <string name="no_history_yet">Aún no tienes historial de comidas.</string>
-    <string name="error_loading_history">No se pudo cargar el historial. Inténtalo de nuevo más tarde.</string>
+
+    <string name="history_title">Mi Historial Nutricional</string>
+    <string name="history_loading">Cargando historial...</string>
+    <string name="no_history_yet_global">Aún no hay historial de comidas registrado.</string>
+    <string name="no_history_for_this_day">No hay comidas registradas para este día.</string>
+    <string name="error_loading_history">Error al cargar el historial. Inténtalo de nuevo más tarde.</string>
     <string name="connection_error_history">Error de conexión al servidor. Verifica tu conexión a internet.</string>
 
-    <!-- Cadenas para HistoryActivity -->
-    <string name="history_title">Historial de Comidas</string>
-    <string name="history_loading">Cargando historial...</string>
+    <string name="goal_calories_label">Calorías Diarias (kcal)</string>
+    <string name="goal_proteins_label">Proteínas Diarias (g)</string>
+    <string name="goal_fats_label">Grasas Diarias (g)</string>
+    <string name="goal_carbs_label">Carbohidratos Diarias (g)</string>
+    <string name="goal_hint_calories">Ej: 2000</string>
+    <string name="goal_hint_proteins">Ej: 100</string>
+    <string name="goal_hint_fats">Ej: 70</string>
+    <string name="goal_hint_carbs">Ej: 250</string>
+    <string name="button_save_goals">Guardar</string>
+    <string name="button_cancel_goals">Cancelar</string>
+    <string name="toast_goals_saved">Metas guardadas.</string>
+    <string name="toast_invalid_number_input">Por favor, ingrese números válidos para las metas.</string>
+    <string name="dialog_set_goals_title">Establecer Metas Nutricionales Diarias</string>
 
-    <!-- Mensajes Toast y otros -->
     <string name="error_no_image_selected">Selecciona una imagen</string>
     <string name="error_getting_image_file">Error al obtener el archivo de imagen.</string>
     <string name="server_error_prefix">Error del servidor:</string>
@@ -53,5 +68,11 @@
     <string name="error_no_image_to_process">No hay imagen seleccionada para procesar.</string>
     <string name="select_meal_type_prompt">Por favor, selecciona un tipo de comida.</string>
 
+    <string name="dialog_delete_item_title">Confirmar Eliminación</string>
+    <string name="dialog_delete_item_message">¿Estás seguro de que quieres eliminar \"%1$s\" del historial?</string>
+    <string name="button_delete">Eliminar</string>
+    <string name="toast_item_deleted_success">Elemento eliminado con éxito.</string>
+    <string name="error_deleting_item">Error al eliminar elemento</string>
+    <string name="connection_error_delete_item">Fallo de conexión al eliminar elemento</string>
 
 </resources>

@@ -24,27 +24,25 @@ public class FoodHistoryItem implements Serializable {
     @SerializedName("meal_type")
     private String mealType; // Tipo de comida (desayuno, almuerzo, etc.)
 
-    // Campos para el resumen nutricional total de la comida registrada
-    @SerializedName("calorias_totales_comida")
+    // --- CAMBIOS AQUÍ: Las claves coinciden con la respuesta REAL del backend ---
+    @SerializedName("nombre_general_comida") // Nombre general del plato (ej. "Chorrillana Clásica")
+    private String nombreGeneralComida;
+
+    @SerializedName("calorias_totales") // Coincide con 'calorias_totales' del backend
     private float totalCalorias;
 
-    @SerializedName("proteinas_totales_comida")
+    @SerializedName("proteinas_totales") // Coincide con 'proteinas_totales' del backend
     private float totalProteinas;
 
-    @SerializedName("grasas_totales_comida")
+    @SerializedName("grasas_totales") // Coincide con 'grasas_totales' del backend
     private float totalGrasas;
 
-    @SerializedName("carbohidratos_totales_comida")
+    @SerializedName("carbohidratos_totales") // Coincide con 'carbohidratos_totales' del backend
     private float totalCarbohidratos;
 
-    // Lista de alimentos individuales dentro de esta entrada de comida (puede ser simplificada para el historial)
-    // Usaremos FoodItem ya existente, pero puede que no necesitemos todos sus detalles para el historial
-    @SerializedName("alimentos")
-    private List<FoodItem> alimentos;
-
-    // Resumen general de la comida (ej. "Sin resumen.")
-    @SerializedName("resumen_general")
-    private String resumenGeneral;
+    // La lista de alimentos detallados ahora se llama "alimentos_detallados" en el backend
+    @SerializedName("alimentos_detallados")
+    private List<FoodItemDetail> alimentosDetallados; // Usaremos un nuevo modelo FoodItemDetail para esto
 
 
     // Constructor vacío (requerido por Gson)
@@ -68,6 +66,10 @@ public class FoodHistoryItem implements Serializable {
         return mealType;
     }
 
+    public String getNombreGeneralComida() { // Nuevo getter
+        return nombreGeneralComida;
+    }
+
     public float getTotalCalorias() {
         return totalCalorias;
     }
@@ -84,23 +86,19 @@ public class FoodHistoryItem implements Serializable {
         return totalCarbohidratos;
     }
 
-    public List<FoodItem> getAlimentos() {
-        return alimentos;
-    }
-
-    public String getResumenGeneral() {
-        return resumenGeneral;
+    public List<FoodItemDetail> getAlimentosDetallados() { // Nuevo getter con nuevo tipo
+        return alimentosDetallados;
     }
 
     // --- Setters (Opcionales, pero buena práctica) ---
     public void setId(String id) { this.id = id; }
-    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; } // Corregido: eliminado 'void' duplicado
     public void setImageName(String imageName) { this.imageName = imageName; }
     public void setMealType(String mealType) { this.mealType = mealType; }
+    public void setNombreGeneralComida(String nombreGeneralComida) { this.nombreGeneralComida = nombreGeneralComida; }
     public void setTotalCalorias(float totalCalorias) { this.totalCalorias = totalCalorias; }
     public void setTotalProteinas(float totalProteinas) { this.totalProteinas = totalProteinas; }
     public void setTotalGrasas(float totalGrasas) { this.totalGrasas = totalGrasas; }
     public void setTotalCarbohidratos(float totalCarbohidratos) { this.totalCarbohidratos = totalCarbohidratos; }
-    public void setAlimentos(List<FoodItem> alimentos) { this.alimentos = alimentos; }
-    public void setResumenGeneral(String resumenGeneral) { this.resumenGeneral = resumenGeneral; }
+    public void setAlimentosDetallados(List<FoodItemDetail> alimentosDetallados) { this.alimentosDetallados = alimentosDetallados; }
 }

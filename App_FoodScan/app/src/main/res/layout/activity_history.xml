@@ -1,66 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/softCream"
     tools:context=".HistoryActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/freshGreen"
-        android:elevation="4dp"
-        app:titleTextColor="@color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/freshGreen"
+            android:elevation="4dp"
+            app:titleTextColor="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/history_title"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/deepGreen"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp" />
-
-        <ProgressBar
-            android:id="@+id/historyProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:indeterminateTint="@color/mellowYellow" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewHistory"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="vertical"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvNoHistoryMessage"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/history_loading"
-            android:textSize="16sp"
-            android:textColor="@color/charcoalText"
-            android:gravity="center"
-            android:layout_marginTop="50dp"
-            android:visibility="gone" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-</LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_calories_remaining_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calorías restantes"
+                        android:textSize="16sp"
+                        android:textColor="@color/charcoalText"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="4dp">
+                        <TextView
+                            android:id="@+id/tv_calories_consumed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="28sp"
+                            android:textColor="@color/deepGreen"
+                            android:textStyle="bold"
+                            tools:text="929"/>
+                        <TextView
+                            android:id="@+id/tv_calories_slash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" / "
+                            android:textSize="20sp"
+                            android:textColor="@color/charcoalText"/>
+                        <TextView
+                            android:id="@+id/tv_calories_goal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="28sp"
+                            android:textColor="@color/lightGrayAccent"
+                            android:textStyle="bold"
+                            tools:text="2700"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/tv_calories_diff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+0"
+                            android:textSize="28sp"
+                            android:textColor="@color/mellowYellow"
+                            android:textStyle="bold"
+                            tools:text="+1771"/>
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/pb_calories"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:progressDrawable="@drawable/progress_bar_calories"
+                        android:progress="0"
+                        android:max="100"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proteínas"
+                        android:textSize="14sp"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginTop="16dp"/>
+                    <ProgressBar
+                        android:id="@+id/pb_proteins"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:progressDrawable="@drawable/progress_bar_proteins"
+                        android:progress="0"
+                        android:max="100"/>
+                    <TextView
+                        android:id="@+id/tv_proteins_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.0g / 0.0g"
+                        android:textSize="12sp"
+                        android:textColor="@color/lightGrayAccent"
+                        tools:text="55.0g / 100g"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Grasas"
+                        android:textSize="14sp"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginTop="8dp"/>
+                    <ProgressBar
+                        android:id="@+id/pb_fats"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:progressDrawable="@drawable/progress_bar_fats"
+                        android:progress="0"
+                        android:max="100"/>
+                    <TextView
+                        android:id="@+id/tv_fats_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.0g / 0.0g"
+                        android:textSize="12sp"
+                        android:textColor="@color/lightGrayAccent"
+                        tools:text="65.0g / 80g"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carbohidratos"
+                        android:textSize="14sp"
+                        android:textColor="@color/charcoalText"
+                        android:layout_marginTop="8dp"/>
+                    <ProgressBar
+                        android:id="@+id/pb_carbs"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:progressDrawable="@drawable/progress_bar_carbs"
+                        android:progress="0"
+                        android:max="100"/>
+                    <TextView
+                        android:id="@+id/tv_carbs_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.0g / 0.0g"
+                        android:textSize="12sp"
+                        android:textColor="@color/lightGrayAccent"
+                        tools:text="40.0g / 200g"/>
+
+                    <Button
+                        android:id="@+id/btn_set_goals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Establecer Metas Diarias"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/freshGreen"
+                        android:textColor="@color/white"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+                <ImageButton
+                    android:id="@+id/btn_prev_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_left"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:contentDescription="Día anterior"/>
+                <TextView
+                    android:id="@+id/tv_current_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hoy, 15 de Junio"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/deepGreen"/>
+                <ImageButton
+                    android:id="@+id/btn_next_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_right"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:contentDescription="Día siguiente"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_meal_sections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_meal_section"/>
+
+            <TextView
+                android:id="@+id/tvNoHistoryMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/history_loading"
+                android:textSize="16sp"
+                android:textColor="@color/charcoalText"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/historyProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="@color/mellowYellow"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

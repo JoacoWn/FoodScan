@@ -4,51 +4,42 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar; // Importar Toolbar
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button btnAddFood;
+    private Button btnHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // --- Configuración de la Toolbar ---
+        // --- Configuración de la Toolbar (NUEVO) ---
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.app_name); // Establece el título "FoodScan"
-            // Si quieres que no haya flecha de vuelta en la pantalla principal
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            // En MainActivity, no establecemos un título de acción bar estándar
+            // porque usaremos un TextView personalizado dentro de la Toolbar para el logo de texto.
+            getSupportActionBar().setDisplayShowTitleEnabled(false); // Deshabilita el título por defecto
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false); // Asegúrate de que el botón de volver no aparezca en la pantalla principal
         }
         // --- Fin Configuración de la Toolbar ---
 
-        Button btnAddFood = findViewById(R.id.btnAddFood);
-        Button btnViewHistory = findViewById(R.id.btnViewHistory);
-        Button btnExit = findViewById(R.id.btnExit); // Asegúrate de que este botón exista en tu XML si lo usas
+        btnAddFood = findViewById(R.id.btnAddFood);
+        btnHistory = findViewById(R.id.btnHistory);
 
-        btnAddFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddFoodActivity.class);
-                startActivity(intent);
-            }
+        btnAddFood.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddFoodActivity.class);
+            startActivity(intent);
         });
 
-        btnViewHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishAffinity(); // Cierra todas las actividades y sale de la aplicación
-            }
+        btnHistory.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            startActivity(intent);
         });
     }
 }

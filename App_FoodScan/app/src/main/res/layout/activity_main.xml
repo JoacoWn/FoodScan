@@ -1,84 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:background="@color/softCream"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/freshGreen"
+        android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:titleTextColor="@color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical|start"
+            tools:ignore="HardcodedText" />
+
     </androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/appTitle"
+    <LinearLayout
+        android:id="@+id/logoContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:textColor="@color/deepGreen"
-        android:layout_marginBottom="64dp"
-        android:fontFamily="sans-serif-condensed-medium" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddFood"
+        android:layout_marginBottom="32dp">
+
+        <ImageView
+            android:id="@+id/imageViewIsotipo"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_logo_foodscan_isotipo"
+            android:contentDescription="@string/app_logo_description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/deepGreen"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnAddFood"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/main_add_food"
-        android:textSize="20sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:layout_marginBottom="24dp"
+        android:text="@string/add_food_button"
         android:backgroundTint="@color/freshGreen"
         android:textColor="@color/white"
-        android:elevation="4dp"
-        app:cornerRadius="8dp" />
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHistory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp" />
 
     <Button
-        android:id="@+id/btnViewHistory"
-        android:layout_width="match_parent"
+        android:id="@+id/btnHistory"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/main_view_history"
-        android:textSize="20sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/mellowYellow"
-        android:textColor="@color/charcoalText"
-        android:elevation="4dp"
-        app:cornerRadius="8dp" />
+        android:text="@string/view_history_button"
+        android:backgroundTint="@color/deepGreen"
+        android:textColor="@color/white"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp" />
 
-    <Button
-        android:id="@+id/btnExit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_exit"
-        android:textSize="20sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:backgroundTint="@color/lightGrayAccent"
-        android:textColor="@color/charcoalText"
-        android:elevation="4dp"
-        app:cornerRadius="8dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
