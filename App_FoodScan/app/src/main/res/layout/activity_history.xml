@@ -49,9 +49,9 @@
                         android:id="@+id/tv_calories_remaining_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Calorías restantes"
+                        android:text="@string/calories_remaining_label"
                         android:textSize="16sp"
-                        android:textColor="@color/charcoalText"/>
+                        android:textColor="@color/softCream"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -109,13 +109,32 @@
                         android:max="100"
                         android:layout_marginTop="8dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Proteínas -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Proteínas"
-                        android:textSize="14sp"
-                        android:textColor="@color/charcoalText"
-                        android:layout_marginTop="16dp"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_protein"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"/>
+                        <!-- Este TextView mostrará el resumen de proteínas. Asegúrate que en HistoryActivity
+                             esté configurado para usar tv_proteins_summary.setText() -->
+                        <TextView
+                            android:id="@+id/tv_proteins_summary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0.0g / 0.0g"
+                            android:textSize="12sp"
+                            android:textColor="@color/softCream"
+                            android:gravity="end"
+                            tools:text="55.0g / 100g"/>
+                    </LinearLayout>
                     <ProgressBar
                         android:id="@+id/pb_proteins"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -124,22 +143,31 @@
                         android:progressDrawable="@drawable/progress_bar_proteins"
                         android:progress="0"
                         android:max="100"/>
-                    <TextView
-                        android:id="@+id/tv_proteins_summary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0.0g / 0.0g"
-                        android:textSize="12sp"
-                        android:textColor="@color/lightGrayAccent"
-                        tools:text="55.0g / 100g"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Grasas -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Grasas"
-                        android:textSize="14sp"
-                        android:textColor="@color/charcoalText"
-                        android:layout_marginTop="8dp"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_fat"
+                            android:textSize="14sp"
+                            android:textColor="@color/softCream"/>
+                        <TextView
+                            android:id="@+id/tv_fats_summary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0.0g / 0.0g"
+                            android:textSize="12sp"
+                            android:textColor="@color/softCream"
+                            android:gravity="end"
+                            tools:text="65.0g / 80g"/>
+                    </LinearLayout>
                     <ProgressBar
                         android:id="@+id/pb_fats"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -148,22 +176,31 @@
                         android:progressDrawable="@drawable/progress_bar_fats"
                         android:progress="0"
                         android:max="100"/>
-                    <TextView
-                        android:id="@+id/tv_fats_summary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0.0g / 0.0g"
-                        android:textSize="12sp"
-                        android:textColor="@color/lightGrayAccent"
-                        tools:text="65.0g / 80g"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Carbohidratos -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Carbohidratos"
-                        android:textSize="14sp"
-                        android:textColor="@color/charcoalText"
-                        android:layout_marginTop="8dp"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_carb"
+                            android:textSize="14sp"
+                            android:textColor="@color/softCream"/>
+                        <TextView
+                            android:id="@+id/tv_carbs_summary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0.0g / 0.0g"
+                            android:textSize="12sp"
+                            android:textColor="@color/softCream"
+                            android:gravity="end"
+                            tools:text="40.0g / 200g"/>
+                    </LinearLayout>
                     <ProgressBar
                         android:id="@+id/pb_carbs"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -172,20 +209,12 @@
                         android:progressDrawable="@drawable/progress_bar_carbs"
                         android:progress="0"
                         android:max="100"/>
-                    <TextView
-                        android:id="@+id/tv_carbs_summary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0.0g / 0.0g"
-                        android:textSize="12sp"
-                        android:textColor="@color/lightGrayAccent"
-                        tools:text="40.0g / 200g"/>
 
                     <Button
                         android:id="@+id/btn_set_goals"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Establecer Metas Diarias"
+                        android:text="@string/set_goals_button"
                         android:layout_marginTop="16dp"
                         android:backgroundTint="@color/freshGreen"
                         android:textColor="@color/white"
@@ -207,7 +236,7 @@
                     android:src="@drawable/ic_arrow_left"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="8dp"
-                    android:contentDescription="Día anterior"/>
+                    android:contentDescription="@string/prev_day_content_desc"/>
                 <TextView
                     android:id="@+id/tv_current_date"
                     android:layout_width="0dp"
@@ -225,7 +254,7 @@
                     android:src="@drawable/ic_arrow_right"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="8dp"
-                    android:contentDescription="Día siguiente"/>
+                    android:contentDescription="@string/next_day_content_desc"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

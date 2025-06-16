@@ -74,5 +74,13 @@
     <string name="toast_item_deleted_success">Elemento eliminado con éxito.</string>
     <string name="error_deleting_item">Error al eliminar elemento</string>
     <string name="connection_error_delete_item">Fallo de conexión al eliminar elemento</string>
+    <string name="calories_remaining_label">Calorías restantes</string>
+    <string name="label_protein">Proteínas</string>
+    <string name="label_fat">Grasas</string>
+    <string name="label_carb">Carbohidratos</string>
+    <string name="set_goals_button">Establecer Metas Diarias</string>
+    <string name="prev_day_content_desc">Día anterior</string>
+    <string name="next_day_content_desc">Día siguiente</string>
+
 
 </resources>
