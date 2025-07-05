@@ -1,11 +1,12 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template  # ¡AÑADE render_template AQUÍ!
 from flask_cors import CORS
 from datetime import datetime, date  # Importa 'date' también para mayor claridad
 import uuid
 import json  # Importado para pretty-print en debug logs
 import tempfile
 from werkzeug.utils import secure_filename
+from bson import ObjectId  # Importar ObjectId para manejar la conversión de IDs de MongoDB
 
 # Importar las clases y funciones de tus módulos existentes
 # Asegúrate de que estas rutas de importación sean correctas para tu estructura 'src'
@@ -326,6 +327,32 @@ def get_food_history_endpoint():
         return jsonify({"error": "Error interno del servidor al obtener historial."}), 500
 
 
+@app.route('/historial/<string:item_id>', methods=['DELETE'])
+def delete_food_history_item_endpoint(item_id):
+    """
+    Endpoint para eliminar una entrada de comida del historial por su ID.
+    El ID se pasa como parte de la URL.
+    """
+    print(f"🗑️ Solicitud de eliminación recibida para el ID: {item_id}")
+    try:
+        # Llama a la función de DataLogger para eliminar la entrada
+        # DataLogger ya maneja la conversión de string a ObjectId
+        deleted = data_logger.delete_food_entry(item_id)
+
+        if deleted:
+            print(f"✅ Entrada {item_id} eliminada con éxito.")
+            return jsonify({"message": f"Entrada con ID {item_id} eliminada con éxito."}), 200
+        else:
+            # Si no se eliminó, puede ser porque no se encontró o el ID es inválido
+            print(f"⚠️ No se pudo eliminar la entrada {item_id}. Posiblemente no encontrada o ID inválido.")
+            return jsonify({"error": f"No se encontró la entrada con ID {item_id} o el ID es inválido."}), 404
+    except Exception as e:
+        print(f"❌ Error interno del servidor al intentar eliminar la entrada {item_id}: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": "Error interno del servidor al eliminar la entrada."}), 500
+
+
 @app.route('/historial_por_fecha', methods=['GET'])
 def get_food_history_by_date_endpoint():
     """
@@ -419,6 +446,56 @@ def saludo():
     return jsonify({"mensaje": "¡Hola desde FoodScan Backend! La API está funcionando."}), 200
 
 
+# --- NUEVO ENDPOINT PARA LA PÁGINA WEB ---
+@app.route('/web_historial', methods=['GET'])
+def web_historial():
+    """
+    Endpoint para mostrar el historial de comidas en una página web.
+    """
+    try:
+        entries = data_logger.get_food_entries()
+
+        # Procesar las entradas para que sean más fáciles de consumir en Jinja2
+        # y manejar los tipos de datos de MongoDB (ObjectId, datetime)
+        processed_entries = []
+        for entry in entries:
+            # Crea una copia para no modificar el objeto original de MongoDB
+            display_entry = entry.copy()
+
+            if '_id' in display_entry and isinstance(display_entry['_id'], ObjectId):
+                display_entry['_id'] = str(display_entry['_id'])
+
+            if 'timestamp' in display_entry and isinstance(display_entry['timestamp'], datetime):
+                # Formatear la fecha y hora para una visualización amigable
+                display_entry['formatted_timestamp'] = display_entry['timestamp'].strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                display_entry['formatted_timestamp'] = "Fecha desconocida"
+
+            # Asegurar que los totales sean flotantes y con 2 decimales para la visualización
+            for key in ["calorias_totales", "proteinas_totales", "grasas_totales", "carbohidratos_totales"]:
+                display_entry[key] = round(float(display_entry.get(key, 0.0)), 2)
+
+            if "alimentos_detallados" in display_entry:
+                for food_item in display_entry["alimentos_detallados"]:
+                    if "nutrientes" in food_item:
+                        for nutrient_key in ["calorias", "proteinas", "grasas", "carbohidratos"]:
+                            food_item["nutrientes"][nutrient_key] = round(
+                                float(food_item["nutrientes"].get(nutrient_key, 0.0)), 2)
+
+            processed_entries.append(display_entry)
+
+        # Ordenar las entradas por fecha descendente (más recientes primero)
+        processed_entries.sort(key=lambda x: x.get('timestamp', datetime.min), reverse=True)
+
+        return render_template('web_history.html', entries=processed_entries)
+    except Exception as e:
+        print(f"❌ Error al generar la página web de historial: {e}")
+        import traceback
+        traceback.print_exc()
+        return "<h1>Error al cargar el historial de comidas.</h1><p>Por favor, revisa los logs del servidor.</p>", 500
+
+
 if __name__ == '__main__':
     print("🚀 Iniciando servidor Flask. Accede a http://127.0.0.1:5000/saludo para probar.")
+    print("🌐 Para ver el historial web, accede a http://127.0.0.1:5000/web_historial")
     app.run(host='0.0.0.0', port=5000, debug=True)

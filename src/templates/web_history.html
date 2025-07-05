@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodScan - Historial de Comidas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2e7d32; /* Deep Green */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .entry-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .entry-header h2 {
+            margin: 0;
+            color: #4CAF50; /* Fresh Green */
+            font-size: 1.4em;
+        }
+        .entry-header span {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .nutrients-summary {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        .nutrient-item {
+            text-align: center;
+            flex-basis: 23%; /* Approx 4 items per row */
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .nutrient-item strong {
+            color: #2e7d32;
+        }
+        .detailed-foods {
+            margin-top: 15px;
+        }
+        .detailed-foods h3 {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+        .food-item {
+            margin-bottom: 5px;
+            padding-left: 10px;
+            border-left: 3px solid #b2dfdb; /* Light Teal Accent */
+        }
+        .food-item p {
+            margin: 0;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+        .food-item .nutrient-detail {
+            font-size: 0.8em;
+            color: #777;
+        }
+        .no-entries {
+            text-align: center;
+            color: #888;
+            padding: 50px;
+            font-size: 1.2em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Historial de Comidas FoodScan</h1>
+
+        {% if entries %}
+            {% for entry in entries %}
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <h2>{{ entry.nombre_general_comida }} ({{ entry.meal_type }})</h2>
+                        <span>Registrado el: {{ entry.formatted_timestamp }}</span>
+                    </div>
+
+                    <div class="nutrients-summary">
+                        <div class="nutrient-item">
+                            <strong>Calorías:</strong><br>{{ entry.calorias_totales }} kcal
+                        </div>
+                        <div class="nutrient-item">
+                            <strong>Proteínas:</strong><br>{{ entry.proteinas_totales }} g
+                        </div>
+                        <div class="nutrient-item">
+                            <strong>Grasas:</strong><br>{{ entry.grasas_totales }} g
+                        </div>
+                        <div class="nutrient-item">
+                            <strong>Carbohidratos:</strong><br>{{ entry.carbohidratos_totales }} g
+                        </div>
+                    </div>
+
+                    {% if entry.alimentos_detallados %}
+                        <div class="detailed-foods">
+                            <h3>Alimentos Detallados:</h3>
+                            {% for food_item in entry.alimentos_detallados %}
+                                <div class="food-item">
+                                    <p><strong>{{ food_item.nombre_alimento }}</strong> ({{ food_item.cantidad_g }}g{% if food_item.es_estimado_ia_original %} - IA{% endif %}{% if food_item.usado_bd_local_para_calculo %} - BD{% endif %})</p>
+                                    <p class="nutrient-detail">
+                                        Cal: {{ food_item.nutrientes.calorias }} |
+                                        Prot: {{ food_item.nutrientes.proteinas }} |
+                                        Gras: {{ food_item.nutrientes.grasas }} |
+                                        Carb: {{ food_item.nutrientes.carbohidratos }}
+                                    </p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No hay detalles de alimentos para esta entrada.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-entries">Aún no hay entradas de comida registradas en el historial.</p>
+        {% endif %}
+
+        <div class="footer">
+            <p>&copy; 2024 FoodScan. Desarrollado para el proyecto de asignatura.</p>
+        </div>
+    </div>
+</body>
+</html>
